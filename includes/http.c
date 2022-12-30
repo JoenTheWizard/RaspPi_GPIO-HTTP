@@ -152,9 +152,9 @@ int handle_http_request(int fd)
 
   //Read the file
   if (!strcmp(request_path, "/on"))
-     setLedState(1);
+     setLedState(GPIO_HIGH);
   else if (!strcmp(request_path, "/off"))
-     setLedState(0);
+     setLedState(GPIO_LOW);
 
   char* read = read_file("web_page/index.html");
 
