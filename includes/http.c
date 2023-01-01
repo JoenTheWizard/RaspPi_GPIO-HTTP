@@ -150,12 +150,13 @@ int handle_http_request(int fd)
   //Get the request type and path from the first line
   sscanf(request, "%s %s %s", request_type, request_path, request_protocol);
 
-  //Read the file
+  //Read the GET request and set the GPIO state on PIN_OUT
   if (!strcmp(request_path, "/on"))
      setLedState(GPIO_HIGH);
   else if (!strcmp(request_path, "/off"))
      setLedState(GPIO_LOW);
 
+  //Read the file
   char* read = read_file("web_page/index.html");
 
   //Send the response
