@@ -1,0 +1,42 @@
+<html>
+    <!-- Styling -->
+<style>
+    h1, h2, a {
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+    }
+    #code {
+        background-color: #2a2a2a;
+        padding-left: 50px;
+        padding-top: 2%;
+        margin-left: 70px;
+        margin-right: 70px;
+        height: 50px;
+        color: white;
+        border-radius: 7%;
+    }
+</style>
+<h1>
+    Controlling GPIO for Raspberry Pi 4
+</h1>
+
+<!-- Buttons to control the state of the LED light via GET request -->
+<a href="/on"><button>Turn On</button></a><br>
+<a href="/off"><button>Turn Off</button></a>
+
+<h2 id="ledState"></h2>
+
+<h3>Try typing this in your terminal<br>This will make the LED blink every second by sending HTTP requests</h3>
+<div id="code">while [ 1 ]; do sleep 1; curl mvpeerchat:2334/on; sleep 1; curl mvpeerchat:2334/off; done</div>
+
+<!-- Check the LED state -->
+<script>
+    var ledState = document.getElementById("ledState");
+
+    var getState = new XMLHttpRequest();
+    getState.open("GET","/state", false);
+    getState.send(null);
+
+    ledState.innerText = `LED state: ${getState.responseText}`;
+</script>
+
+</html>
